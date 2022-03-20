@@ -1,0 +1,12 @@
+<h1>Bienvenido {{username}}!</h1>
+
+<input *ngIf="visible" type="text" [(ngModel)]="username">
+<form (submit)="addUser()">
+  <button *ngIf="visible"type="submit" (keyup.enter)="addUser()">New user +</button>
+</form>
+
+
+<div *ngFor="let item of users">
+  <span>{{item}}</span>
+
+</div>
