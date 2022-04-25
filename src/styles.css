@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* @use '@angular/material' as mat; */
+/* .my-special-section {
+  $special-primary: mat.define-palette(mat.$orange-palette);
+  $special-accent: mat.define-palette(mat.$brown-palette);
+  $special-theme: mat.define-dark-theme((
+    color: (primary: $special-primary, accent: $special-accent),
+  ));
 
-html, body { height: 100%; }
+  @include mat.button-color($special-theme);
+ } */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

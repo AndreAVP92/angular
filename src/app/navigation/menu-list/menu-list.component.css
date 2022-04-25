@@ -1,0 +1,6 @@
+mat-nav-list a span, mat-list-item span {
+  display: inline-block;
+  padding-left: 20px;
+}
+
+

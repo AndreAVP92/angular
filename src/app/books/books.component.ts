@@ -1,33 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../services/books.service';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+
+import { Books } from './books.model';
+import { BooksService } from './books.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, AfterViewInit {
 
-  books: string[]= [];
+  books: Books[] = [];
+  showColumns = ["title", "description", "author", "price"];
+  dataSource = new MatTableDataSource<Books>();
 
-  constructor(private bookService: BookService) { }
+  @ViewChild(MatSort) ordering!: MatSort;
+  @ViewChild(MatPaginator) pagination!: MatPaginator;
+
+  constructor(private booksService: BooksService) { }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.ordering;
+    this.dataSource.paginator = this.pagination;
+  }
 
   ngOnInit(): void {
-    this.books = this.bookService.getBooks();
-    this.bookService.subject.subscribe(() => {
-      this.books = this.bookService.getBooks();
-    });
+    this.dataSource.data = this.booksService.getBooks();
   }
 
-  deleteBook(book:any){
-    this.books = this.books.filter(x => x !== book);
-  }
-
-  saveBook(f:any){
-    if(f.valid){
-      this.bookService.addBook(f.value.nameBook);
-    }
-    this.bookService.getBooks();
+  filter(data: string){
+    this.dataSource.filter = data;
   }
 }

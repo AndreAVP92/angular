@@ -1,34 +1,49 @@
+/* Modules */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
+
+/* Components */
 import { AppComponent } from './app.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { BooksComponent } from './books/books.component';
-import { BookComponent } from './book/book.component';
-import { BookService } from './services/books.service';
 import { InicioComponent } from './inicio.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './security/register/register.component';
+import { LoginComponent } from './security/login/login.component';
+import { NavComponent } from './navigation/nav/nav.component';
+import { MenuListComponent } from './navigation/menu-list/menu-list.component';
 
-
+/* Services */
+import { BookService } from './services/books.service';
+import { SecurityService } from './security/security.service';
+import { BooksService } from './books/books.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent,
     BooksComponent,
-    BookComponent,
-    InicioComponent
+    InicioComponent,
+    RegisterComponent,
+    LoginComponent,
+    NavComponent,
+    MenuListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
-    BookService
+    BookService,
+    SecurityService,
+    BooksService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,10 @@
+.search {
+  margin-top: 20px;
+}
+
+#button-add {
+  right: 45px;
+  bottom: 45px;
+  left: auto;
+  position: absolute;
+}

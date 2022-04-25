@@ -1,9 +1,41 @@
-<h1>My favourite books</h1>
+<div fxLayoutAlign="center center">
+ <mat-form-field fxFlex="30%" appearance="fill" class="search">
+   <input matInput type="text" (keyup)="filter($any($event.target).value)" placeholder="Enter value...">
+   <mat-icon matSuffix>search</mat-icon>
+ </mat-form-field>
+</div>
 
-<form (ngSubmit)="saveBook(f)" #f="ngForm">
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.bookId}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.title}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.description}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="author">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.author}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.price}}</mat-cell>
+  </ng-container>
 
-  <input type="text" name="nameBook" ngModel required>
-  <button type="submit">Add Book</button>
-</form>
+  <mat-header-row *matHeaderRowDef="showColumns"></mat-header-row>
+  <mat-row *matRowDef="let row, columns: showColumns"></mat-row>
+</mat-table>
 
-<app-book (bookClicked)="deleteBook(book)" *ngFor="let book of books" [title]="book"></app-book>
+<mat-paginator fxLayoutAlign="center" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements">
+</mat-paginator>
+
+<button mat-fab id="button-add" color="warn">
+  <mat-icon>add</mat-icon>
+</button>

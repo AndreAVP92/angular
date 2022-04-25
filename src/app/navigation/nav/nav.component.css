@@ -1,0 +1,16 @@
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover,
+a:active {
+  color: #DBCDE6;
+}
+
+.menu-navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+

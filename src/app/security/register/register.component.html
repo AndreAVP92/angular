@@ -1,0 +1,45 @@
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="registerUser(f)" fxLayoutGap="10px">
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese Nombre</mat-label>
+        <input type="text" ngModel name="name" required placeholder="Ingrese nombre" matInput>
+        <mat-error>Debe ingresar su nombre</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese Apellido</mat-label>
+        <input type="text" ngModel name="lastname" required placeholder="Ingrese apellido" matInput>
+        <mat-error>Debe ingresar su apellido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese Nombre de usuario</mat-label>
+        <input type="text" ngModel name="username" required placeholder="Ingrese nombre de usuario" matInput>
+        <mat-error>Debe ingresar su nombre de usuario</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese E-mail</mat-label>
+        <input type="email" matInput placeholder="example@gmail.com" ngModel name="email" email required #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">El email no puede estar en blanco</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">El email es inválido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" hintLabel="El password debe tener 7 caracteres como mínimo">
+        <mat-label>Ingrese Password</mat-label>
+        <input type="password" matInput placeholder="Ingrese password" ngModel name="password" required minlength="7">
+        <mat-error>El password no cumple con la condición</mat-error>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Guardar</button>
+    </form>
+  </mat-card>
+
+</section>
+
+<!-- <section id="container">
+  <div id="element1" class="element"></div>
+  <div id="element2" class="element"></div>
+  <div id="element3" class="element"></div>
+</section> -->
