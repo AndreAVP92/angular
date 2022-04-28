@@ -1,0 +1,56 @@
+<style scoped>
+  .w100 {
+    width: 100%!important;
+  }
+</style>
+
+<h1>Add book</h1>
+<form #f="ngForm" (ngSubmit)="saveBook(f)">
+  <mat-dialog-content>
+    <section fxLayoutAlign="center" style="margin-top:10px; margin-bottom:10px;">
+      <mat-card fxFlex="100%">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" >
+
+          <mat-form-field class="w100">
+            <mat-label>Enter title</mat-label>
+            <input type="text" matInput placeholder="Ex. Lord of the rings" name="title" ngModel required>
+            <mat-error>You must enter the title of the book</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w100">
+            <mat-label>Enter description</mat-label>
+            <input type="text" matInput placeholder="Ex. in the movie too" name="description" ngModel required>
+            <mat-error>You must enter the description of the book</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w100">
+            <mat-label>Enter price</mat-label>
+            <input type="text" matInput placeholder="Ex. 80" name="price" ngModel required>
+            <mat-error>You must enter the description of the book</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w100">
+            <mat-label>Select author</mat-label>
+            <mat-select [(ngModel)]="selectAuthor" name="author" (selectionChange)="selected($event)">
+              <mat-option *ngFor="let item of authors" value="item.authorId">
+                {{item.name + ' ' + item.lastName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="w100">
+            <mat-label>Choose a date</mat-label>
+            <input matInput placeholder="Choose a date" [matDatepicker]="picker" name="datePublished" [(ngModel)]="datePublished">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+      </mat-card>
+    </section>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true">Close</button>
+    <button mat-button type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

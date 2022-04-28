@@ -17,7 +17,7 @@ export class SecurityService {
       email: user.email,
       userId: Math.round(Math.random() * 10000).toString(),
       name: user.name,
-      lastname: user.lastname,
+      lastName: user.lastName,
       username: user.username,
       password: ''
     };
@@ -31,7 +31,7 @@ export class SecurityService {
       email: loginData.email,
       userId: Math.round(Math.random() * 10000).toString(),
       name: '',
-      lastname: '',
+      lastName: '',
       username: '',
       password: ''
     };

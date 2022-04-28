@@ -7,6 +7,8 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
 
 /* Components */
 import { AppComponent } from './app.component';
@@ -18,19 +20,25 @@ import { NavComponent } from './navigation/nav/nav.component';
 import { MenuListComponent } from './navigation/menu-list/menu-list.component';
 
 /* Services */
-import { BookService } from './services/books.service';
 import { SecurityService } from './security/security.service';
 import { BooksService } from './books/books.service';
+import { BookNewComponent } from './books/book-new.component';
+import { AuthorsComponent } from './authors/authors.component';
+import { AuthorsServices } from './authors/authors.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BooksComponent,
     InicioComponent,
+    NavComponent,
+    MenuListComponent,
+    /* BOOKS */
+    BooksComponent,
+    BookNewComponent,
+    /* SECURITY */
     RegisterComponent,
     LoginComponent,
-    NavComponent,
-    MenuListComponent
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,13 +46,17 @@ import { BooksService } from './books/books.service';
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [
-    BookService,
+    {provide: MAT_DATE_LOCALE, useValue:'es-ES'},
+    BooksService,
     SecurityService,
-    BooksService
+    BooksService,
+    AuthorsServices
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BookNewComponent]
 })
 export class AppModule { }

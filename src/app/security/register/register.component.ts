@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     this.securityService.registerUser({
       email: form.value.email,
       password: form.value.password,
-      lastname: form.value.lastname,
+      lastName: form.value.lastName,
       name: form.value.name,
       username: form.value.username,
       userId: form.value.userId

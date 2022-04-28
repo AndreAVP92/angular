@@ -1,4 +1,5 @@
 import { Books } from './books.model';
+import { Subject } from 'rxjs';
 
 export class BooksService {
 
@@ -9,7 +10,14 @@ export class BooksService {
     { bookId: 4, title:'Java', description: 'libro básico 4', author: 'Vaxi Drezd', price: 21 }
   ];
 
+  bookSubject = new Subject<Books>();
+
   getBooks() {
     return this.bookList.slice();
+  }
+
+  saveBook(book: Books) {
+    this.bookList.push(book);
+    this.bookSubject.next(book);
   }
 }
