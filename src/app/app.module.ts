@@ -50,11 +50,9 @@ import { AuthorsServices } from './authors/authors.service';
     HttpClientModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue:'es-ES'},
-    BooksService,
     SecurityService,
-    BooksService,
-    AuthorsServices
+    AuthorsServices,
+    {provide: MAT_DATE_LOCALE, useValue:'es-ES'}
   ],
   bootstrap: [AppComponent],
   entryComponents: [BookNewComponent]

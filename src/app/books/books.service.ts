@@ -1,23 +1,50 @@
-import { Books } from './books.model';
+import { Book } from './books.model';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { PaginationBooks } from './pagination-books.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class BooksService {
+  baseUrl = environment.baseUrl;
+  bookSubject = new Subject<Book>();
 
-  private bookList: Books[] = [
-    { bookId: 1, title:'Algoritmos', description: 'libro básico 1', author: 'Vaxi Dreza', price: 18 },
-    { bookId: 2, title:'Angular', description: 'libro básico 2', author: 'Vaxi Drezb', price: 19 },
-    { bookId: 3, title:'ASP .NET', description: 'libro básico 3', author: 'Vaxi Drezx', price: 20 },
-    { bookId: 4, title:'Java', description: 'libro básico 4', author: 'Vaxi Drezd', price: 21 }
-  ];
+  bookPagination!: PaginationBooks;
+  bookPaginationSubject = new Subject<PaginationBooks>();
 
-  bookSubject = new Subject<Books>();
+  constructor(private http: HttpClient) { }
 
-  getBooks() {
-    return this.bookList.slice();
+  getBooks(bookPerPage: number, currentPage: number, sort: string, sortDirection: string, filterValue: any) {
+    const request = {
+      pageSize: bookPerPage,
+      page: currentPage,
+      sort: sort,
+      sortDirection: sortDirection,
+      filterValue: filterValue
+    };
+    this.http.post<PaginationBooks>(this.baseUrl + 'api/Book/pagination', request)
+        .subscribe((response) => {
+          this.bookPagination = response;
+          this.bookPaginationSubject.next(this.bookPagination);
+        })
   }
 
-  saveBook(book: Books) {
-    this.bookList.push(book);
-    this.bookSubject.next(book);
+  getActualListener(){
+    /* el bookPaginationSubject tiene la data que viene del servidor */
+    return this.bookPaginationSubject.asObservable();
+  }
+
+  saveBook(book: Book){
+    this.http.post(this.baseUrl + 'api/Book', book)
+      .subscribe((response) => {
+        this.bookSubject.next(book);
+      });
+  }
+
+  saveBookListener(){
+    return this.bookSubject.asObservable();
   }
 }

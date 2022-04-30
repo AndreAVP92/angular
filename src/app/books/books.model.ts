@@ -1,8 +1,11 @@
-export interface Books {
-  bookId: number;
+export interface Book {
+  id: string | null; // type-guard
   title: string;
   description: string;
   price: number;
-  datePublished?: Date;
-  author: string;
+  publishDate?: Date;
+  author: {
+    id: string,
+    fullName: string
+  };
 }
