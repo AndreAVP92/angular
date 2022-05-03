@@ -17,7 +17,7 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(bookPerPage: number, currentPage: number, sort: string, sortDirection: string, filterValue: any) {
+  getBooks(bookPerPage: number, currentPage: number, sort: string, sortDirection: string, filterValue: any): void {
     const request = {
       pageSize: bookPerPage,
       page: currentPage,
@@ -25,26 +25,26 @@ export class BooksService {
       sortDirection: sortDirection,
       filterValue: filterValue
     };
-    this.http.post<PaginationBooks>(this.baseUrl + 'api/Book/pagination', request)
+    this.http.post<PaginationBooks>(this.baseUrl + 'book/pagination', request)
         .subscribe((response) => {
           this.bookPagination = response;
           this.bookPaginationSubject.next(this.bookPagination);
         })
   }
 
-  getActualListener(){
+  getActualListener(): any {
     /* el bookPaginationSubject tiene la data que viene del servidor */
     return this.bookPaginationSubject.asObservable();
   }
 
-  saveBook(book: Book){
-    this.http.post(this.baseUrl + 'api/Book', book)
+  saveBook(book: Book): void {
+    this.http.post(this.baseUrl + 'book', book)
       .subscribe((response) => {
         this.bookSubject.next(book);
       });
   }
 
-  saveBookListener(){
+  saveBookListener(): any{
     return this.bookSubject.asObservable();
   }
 }

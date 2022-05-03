@@ -26,7 +26,7 @@
         <mat-error *ngIf="!emailInput.hasError('required')">El email es inválido</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" hintLabel="El password debe tener 7 caracteres como mínimo">
+      <mat-form-field appearance="fill" hintLabel="El password debe tener 9 caracteres como mínimo y contener mayúsculas, minúsculas, un caracter especial y números.">
         <mat-label>Ingrese Password</mat-label>
         <input type="password" matInput placeholder="Ingrese password" ngModel name="password" required minlength="7">
         <mat-error>El password no cumple con la condición</mat-error>

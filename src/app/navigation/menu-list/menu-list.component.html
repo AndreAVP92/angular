@@ -3,6 +3,14 @@
     <mat-icon>home</mat-icon>
     <span>Home</span>
   </a>
+  <a *ngIf="userStatus" mat-list-item routerLink="/books" (click)="onCloseMenu()">
+    <mat-icon>book</mat-icon>
+    <span>Books</span>
+  </a>
+  <a *ngIf="userStatus" mat-list-item routerLink="/authors" (click)="onCloseMenu()">
+    <mat-icon>recent_actors</mat-icon>
+    <span>Authors</span>
+  </a>
   <a *ngIf="!userStatus" mat-list-item routerLink="/register" (click)="onCloseMenu()">
     <mat-icon>how_to_reg</mat-icon>
     <span>Sign Up</span>

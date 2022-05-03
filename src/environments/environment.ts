@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:7234/'
+  baseUrl: 'http://localhost:8571/' //Este es el puerto api gateway
 };
 
 /*

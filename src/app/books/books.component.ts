@@ -52,12 +52,12 @@ export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.booksService.getBooks(this.booksPerPage, this.currentPage, this.sort, this.sortDirection, this.filterValue);
-    this.booksService
-        .getActualListener()
-        .subscribe((pagination: PaginationBooks) => {
-          this.dataSource = new MatTableDataSource<Book>(pagination.items);
-          this.totalBooks = pagination.totalRows;
-        });
+    this.bookSubscription = this.booksService
+                            .getActualListener()
+                            .subscribe((pagination: PaginationBooks) => {
+                              this.dataSource = new MatTableDataSource<Book>(pagination.items);
+                              this.totalBooks = pagination.totalRows;
+                            });
   }
 
   ngAfterViewInit(): void {
@@ -77,7 +77,7 @@ export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
         //$this.filterValue = filterValueLocal;
         $this.booksService.getBooks($this.booksPerPage, $this.currentPage, $this.sort, $this.sortDirection, filterValueLocal);
       }
-    }, 1000)
+    }, 200)
   }
 
   openDialog(): void {

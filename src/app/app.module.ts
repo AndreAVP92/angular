@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /* Components */
 import { AppComponent } from './app.component';
@@ -20,11 +20,10 @@ import { NavComponent } from './navigation/nav/nav.component';
 import { MenuListComponent } from './navigation/menu-list/menu-list.component';
 
 /* Services */
-import { SecurityService } from './security/security.service';
-import { BooksService } from './books/books.service';
 import { BookNewComponent } from './books/book-new.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorsServices } from './authors/authors.service';
+import { SecurityInterceptor } from './security/security-interceptor';
 
 @NgModule({
   declarations: [
@@ -50,9 +49,9 @@ import { AuthorsServices } from './authors/authors.service';
     HttpClientModule
   ],
   providers: [
-    SecurityService,
+    { provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true },
     AuthorsServices,
-    {provide: MAT_DATE_LOCALE, useValue:'es-ES'}
+    { provide: MAT_DATE_LOCALE, useValue:'es-ES' }
   ],
   bootstrap: [AppComponent],
   entryComponents: [BookNewComponent]

@@ -6,7 +6,7 @@ export interface PaginationBooks {
   sort: string;
   sortDirection: string;
   pagesQuantity: number;
-  items: Book[];
   filterValue: {};
+  items: Book[];
   totalRows: number;
 }

@@ -15,13 +15,15 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(form: NgForm){
+    console.table(form.value);
     this.securityService.registerUser({
       email: form.value.email,
       password: form.value.password,
-      lastName: form.value.lastName,
+      lastName: form.value.lastname,
       name: form.value.name,
       username: form.value.username,
-      userId: form.value.userId
+      userId: form.value.userId,
+      token: ''
     });
   }
 }

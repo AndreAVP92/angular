@@ -9,10 +9,10 @@ import { SecurityRouter } from './security/security.router';
 
 const routes: Routes = [
   { path: '', component: InicioComponent, canActivate: [SecurityRouter]},
-  { path: 'books', component: BooksComponent},
+  { path: 'books', component: BooksComponent, canActivate: [SecurityRouter]},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'authors', component: AuthorsComponent}
+  { path: 'authors', component: AuthorsComponent, canActivate: [SecurityRouter]}
 ];
 
 @NgModule({
